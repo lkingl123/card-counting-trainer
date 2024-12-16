@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SpinnerWrapper from "./components/SpinnerWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      {/* Suppress hydration warning to ignore external class mismatches */}
+      <body className="bg-gray-100 antialiased" suppressHydrationWarning={true}>
+        <SpinnerWrapper>
+          {children}
+        </SpinnerWrapper>
       </body>
     </html>
   );
