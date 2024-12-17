@@ -14,7 +14,7 @@ export default function SpinnerWrapper({
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false); // Simulated loading duration
-    }, 4000);
+    }, 1000);
 
     return () => clearTimeout(timeout); // Cleanup timeout
   }, [pathname]);
