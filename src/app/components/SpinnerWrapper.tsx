@@ -32,7 +32,7 @@ export default function SpinnerWrapper({
         </div>
         <style jsx>{`
           .spinner-card {
-            animation: spin 2s infinite linear;
+            animation: spin 0.8s infinite linear;
           }
 
           @keyframes spin {

@@ -41,3 +41,27 @@ body {
 .card-back {
   transform: rotateY(180deg); /* Starts rotated for the back face */
 }
+
+body {
+  background-color: #222;
+  color: white;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+
+.player-spots-container {
+  display: flex;
+  justify-content: space-evenly; /* Evenly spread out 4 player spots */
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+  align-items: flex-end; /* Align to bottom */
+}
+
