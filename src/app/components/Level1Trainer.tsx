@@ -17,18 +17,18 @@ const Level1Trainer: React.FC = () => {
     return 0; // Neutral cards: 7, 8, 9
   };
 
-  const [deck, setDeck] = useState<string[]>([...cards]);
   const [usedCards, setUsedCards] = useState<string[]>([]);
-  const [currentCard, setCurrentCard] = useState<string>('');
+  const [currentCard, setCurrentCard] = useState<string | null>(null);
   const [runningCount, setRunningCount] = useState<number>(0);
-  const [feedback, setFeedback] = useState<string>('');
+  const [feedback, setFeedback] = useState<string>('Deck has been reset!');
 
   useEffect(() => {
-    drawCard();
+    handleReset();
   }, []);
 
   const drawCard = () => {
-    const availableCards = deck.filter((card) => !usedCards.includes(card));
+    const availableCards = cards.filter((card) => !usedCards.includes(card));
+
     if (availableCards.length === 0) {
       setFeedback('No more cards left!');
       return;
@@ -37,13 +37,15 @@ const Level1Trainer: React.FC = () => {
     const randomCard =
       availableCards[Math.floor(Math.random() * availableCards.length)];
     setCurrentCard(randomCard);
-    setUsedCards([...usedCards, randomCard]);
-    setRunningCount(getCardValue(randomCard));
+    setUsedCards((prev) => [...prev, randomCard]);
+    setRunningCount((prev) => prev + getCardValue(randomCard));
     setFeedback('');
   };
 
   const handleSelection = (selectedValue: number) => {
-    const correct = selectedValue === runningCount;
+    if (!currentCard) return;
+
+    const correct = selectedValue === getCardValue(currentCard);
     setFeedback(
       correct
         ? `✅ Correct! Running count: ${runningCount}`
@@ -52,25 +54,40 @@ const Level1Trainer: React.FC = () => {
     setTimeout(() => drawCard(), 1000);
   };
 
+  const handleReset = () => {
+    setUsedCards([]); // Clear all used cards
+    setCurrentCard(null); // No card displayed initially
+    setRunningCount(0);
+    setFeedback('Deck has been reset!');
+    setTimeout(() => drawCard(), 500); // Draw the first card again
+  };
+
   return (
     <div className="flex bg-gray-100 min-h-screen">
       {/* Sidebar - Deck Status */}
-      <div className="w-1/6 p-2 overflow-y-auto border-r border-gray-300">
+      <div className="w-1/6 p-2 overflow-hidden border-r border-gray-300">
         <h2 className="text-sm font-bold mb-2 text-gray-700">Deck Status</h2>
-        <div className="grid grid-cols-5 gap-1">
+        <div className="grid grid-cols-5 gap-1 mb-4">
           {cards.map((card) => (
             <img
               key={card}
               src={`/cards/${card}.png`}
               alt={card}
-              className={`w-8 h-auto border rounded ${
+              className={`w-10 h-auto rounded-lg ${
                 usedCards.includes(card)
-                  ? 'opacity-50 grayscale border-gray-300'
-                  : 'border-gray-400 shadow-sm'
+                  ? 'opacity-50 grayscale shadow-md'
+                  : 'shadow-lg'
               }`}
             />
           ))}
         </div>
+        {/* Reset Button */}
+        <button
+          onClick={handleReset}
+          className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md shadow-md"
+        >
+          Reset Deck
+        </button>
       </div>
 
       {/* Main Content */}
@@ -85,7 +102,7 @@ const Level1Trainer: React.FC = () => {
             <img
               src={`/cards/${currentCard}.png`}
               alt="card"
-              className="w-40 h-auto border-4 border-gray-400 rounded-lg shadow-lg"
+              className="w-40 h-auto rounded-lg shadow-2xl"
             />
           )}
         </div>
@@ -94,19 +111,19 @@ const Level1Trainer: React.FC = () => {
         <div className="flex space-x-4">
           <button
             onClick={() => handleSelection(-1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white w-16 h-16 rounded-full shadow flex items-center justify-center text-2xl"
+            className="bg-blue-500 hover:bg-blue-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
           >
             -1
           </button>
           <button
             onClick={() => handleSelection(0)}
-            className="bg-gray-500 hover:bg-gray-600 text-white w-16 h-16 rounded-full shadow flex items-center justify-center text-2xl"
+            className="bg-gray-500 hover:bg-gray-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
           >
             0
           </button>
           <button
             onClick={() => handleSelection(1)}
-            className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow flex items-center justify-center text-2xl"
+            className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
           >
             +1
           </button>
