@@ -138,6 +138,55 @@ const Level1Trainer: React.FC = () => {
           {feedback}
         </p>
       </div>
+
+{/* Card Counting Guide with Images */}
+<div className="w-1/4 bg-gray-800 p-4 border-l border-gray-300 text-white">
+        <h2 className="text-lg font-bold mb-4">Card Counting Guide</h2>
+        <div className="mb-4">
+          <p className="font-semibold mb-2">High Cards (-1):</p>
+          <div className="flex space-x-2">
+            {['10_of_hearts', 'jack_of_clubs', 'queen_of_diamonds', 'king_of_spades', 'ace_of_hearts'].map((card) => (
+              <img
+                key={card}
+                src={`/cards/${card}.png`}
+                alt={card}
+                className="w-10 h-auto rounded shadow-lg bg-white"
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mb-4">
+          <p className="font-semibold mb-2">Low Cards (+1):</p>
+          <div className="flex space-x-2">
+            {['2_of_clubs', '3_of_hearts', '4_of_spades', '5_of_diamonds', '6_of_clubs'].map((card) => (
+              <img
+                key={card}
+                src={`/cards/${card}.png`}
+                alt={card}
+                className="w-10 h-auto rounded shadow-lg bg-white"
+              />
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="font-semibold mb-2">Neutral Cards (0):</p>
+          <div className="flex space-x-2">
+            {['7_of_clubs', '8_of_diamonds', '9_of_hearts'].map((card) => (
+              <img
+                key={card}
+                src={`/cards/${card}.png`}
+                alt={card}
+                className="w-10 h-auto rounded shadow-lg bg-white"
+              />
+            ))}
+          </div>
+        </div>
+        <p className="mt-4 text-sm">
+          Keep a running count as cards are dealt. High cards decrease the count,
+          and low cards increase it. This simple counting system helps you track
+          the advantage in the deck!
+        </p>
+      </div>
     </div>
   );
 };
