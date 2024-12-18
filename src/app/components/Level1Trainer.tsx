@@ -49,8 +49,8 @@ const Level1Trainer: React.FC = () => {
     const correct = selectedValue === getCardValue(currentCard);
     setFeedback(
       correct
-        ? `✅ Correct! Running count: ${runningCount}`
-        : `❌ Incorrect. Actual count: ${runningCount}`
+        ? `✅ Correct!`
+        : `❌ Incorrect.`
     );
     setTimeout(() => drawCard(), 1000);
   };
