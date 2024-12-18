@@ -156,53 +156,60 @@ const Level1Trainer: React.FC = () => {
 
       {/* Card Counting Guide */}
       <div className="w-full md:w-1/4 bg-gray-800 p-4 border-t md:border-t-0 md:border-l border-gray-300 text-white">
-        <h2 className="text-lg font-bold mb-4">Card Counting Guide</h2>
-        <div className="mb-4">
-          <p className="font-semibold mb-2">High Cards (-1):</p>
-          <div className="flex flex-wrap justify-center space-x-2">
-            {['10_of_hearts', 'jack_of_clubs', 'queen_of_diamonds', 'king_of_spades', 'ace_of_hearts'].map((card) => (
-              <img
-                key={card}
-                src={`/cards/${card}.png`}
-                alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
-              />
-            ))}
-          </div>
-        </div>
-        <div className="mb-4">
-          <p className="font-semibold mb-2">Low Cards (+1):</p>
-          <div className="flex flex-wrap justify-center space-x-2">
-            {['2_of_clubs', '3_of_hearts', '4_of_spades', '5_of_diamonds', '6_of_clubs'].map((card) => (
-              <img
-                key={card}
-                src={`/cards/${card}.png`}
-                alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
-              />
-            ))}
-          </div>
-        </div>
-        <div>
-          <p className="font-semibold mb-2">Neutral Cards (0):</p>
-          <div className="flex flex-wrap justify-center space-x-2">
-            {['7_of_clubs', '8_of_diamonds', '9_of_hearts'].map((card) => (
-              <img
-                key={card}
-                src={`/cards/${card}.png`}
-                alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
-              />
-            ))}
-          </div>
-        </div>
-        <p className="mt-4 text-xs md:text-sm">
-          Keep a running count as cards are dealt. High cards decrease the count,
-          and low cards increase it. This simple counting system helps you track
-          the advantage in the deck!
-        </p>
-      </div>
+  <h2 className="text-lg font-bold mb-4">Card Counting Guide</h2>
+  <div className="mb-4">
+    <p className="font-semibold mb-2">High Cards (-1):</p>
+    <p className="text-sm text-gray-200 mb-2">
+      High cards (10, Jack, Queen, King, Ace) are advantageous for the player because they increase the chance of getting a blackjack or higher-value hands. When high cards are dealt, the count decreases (-1), making the deck less favorable for the player.
+    </p>
+    <div className="flex flex-wrap justify-center space-x-2">
+      {['10_of_hearts', 'jack_of_clubs', 'queen_of_diamonds', 'king_of_spades', 'ace_of_hearts'].map((card) => (
+        <img
+          key={card}
+          src={`/cards/${card}.png`}
+          alt={card}
+          className="w-10 h-auto rounded shadow-lg bg-white mb-2"
+        />
+      ))}
     </div>
+  </div>
+  <div className="mb-4">
+    <p className="font-semibold mb-2">Low Cards (+1):</p>
+    <p className="text-sm text-gray-200 mb-2">
+      Low cards (2, 3, 4, 5, 6) are disadvantageous for the player because they favor the dealer by reducing the chance of a bust and creating low-value hands. When low cards are dealt, the count increases (+1), making the deck more favorable for the player.
+    </p>
+    <div className="flex flex-wrap justify-center space-x-2">
+      {['2_of_clubs', '3_of_hearts', '4_of_spades', '5_of_diamonds', '6_of_clubs'].map((card) => (
+        <img
+          key={card}
+          src={`/cards/${card}.png`}
+          alt={card}
+          className="w-10 h-auto rounded shadow-lg bg-white mb-2"
+        />
+      ))}
+    </div>
+  </div>
+  <div>
+    <p className="font-semibold mb-2">Neutral Cards (0):</p>
+    <p className="text-sm text-gray-200 mb-2">
+      Neutral cards (7, 8, 9) have no effect on the count because they do not significantly impact the probability of favorable or unfavorable outcomes.
+    </p>
+    <div className="flex flex-wrap justify-center space-x-2">
+      {['7_of_clubs', '8_of_diamonds', '9_of_hearts'].map((card) => (
+        <img
+          key={card}
+          src={`/cards/${card}.png`}
+          alt={card}
+          className="w-10 h-auto rounded shadow-lg bg-white mb-2"
+        />
+      ))}
+    </div>
+  </div>
+  <p className="mt-4 text-xs md:text-sm text-gray-300">
+    A positive running count indicates a higher proportion of high cards remaining in the deck, favoring the player. Conversely, a negative running count means more low cards are left, favoring the dealer. Use this information to adjust your bets and strategy!
+  </p>
+</div>
+</div>
   );
 };
 
