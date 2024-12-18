@@ -12,7 +12,7 @@ const ToggleTrainer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gray-100 h-screen overflow-hidden">
+    <div className="flex flex-col items-center bg-gray-100 min-h-screen">
       {/* Fixed Toggle Container */}
       <div className="w-full flex justify-center fixed top-0 bg-white shadow-md py-4 z-10">
         <div className="flex items-center space-x-4">
@@ -54,8 +54,8 @@ const ToggleTrainer: React.FC = () => {
         </div>
       </div>
 
-      {/* Content Below the Toggle */}
-      <div className="flex-1 w-full pt-16 overflow-hidden">
+      {/* Scrollable Content */}
+      <div className="w-full pt-20 flex-1 overflow-auto">
         {isLevel2 ? <Level2Trainer /> : <Level1Trainer />}
       </div>
     </div>
