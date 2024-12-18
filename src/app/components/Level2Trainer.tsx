@@ -82,14 +82,14 @@ const Level2Trainer: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-800 text-white flex">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-800 text-white">
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center">
-        <h1 className="text-3xl font-bold my-4">Level 2 - Blackjack Trainer</h1>
+      <div className="flex-1 flex flex-col items-center p-4">
+        <h1 className="text-xl md:text-3xl font-bold my-4 text-center">Level 2 - Blackjack Trainer</h1>
 
         {/* Dealer Cards */}
         <div className="flex items-center justify-center mb-4">
-          <h2 className="text-xl mr-4">Dealer's Cards:</h2>
+          <h2 className="text-lg md:text-xl mr-4">Dealer's Cards:</h2>
           {dealerCards.map((card, index) => (
             <Card
               key={index}
@@ -105,10 +105,10 @@ const Level2Trainer: React.FC = () => {
         </div>
 
         {/* Blackjack Table */}
-        <div className="relative w-full max-w-4xl bg-green-700 h-72 rounded-lg p-4">
+        <div className="relative w-full max-w-4xl bg-green-700 h-64 md:h-72 rounded-lg p-4">
           {/* Deck */}
           <div className="absolute left-4 bottom-1/2 transform translate-y-1/2">
-            <Card card="back" style={{ width: "80px", height: "120px" }} />
+            <Card card="back" style={{ width: "60px", height: "90px" }} />
           </div>
 
           {/* Player Spots */}
@@ -119,8 +119,8 @@ const Level2Trainer: React.FC = () => {
               style={{
                 left: `${10 + spot * 12}%`,
                 bottom: "10%",
-                width: "80px",
-                height: "120px",
+                width: "60px",
+                height: "90px",
               }}
             >
               {dealtCards
@@ -143,11 +143,11 @@ const Level2Trainer: React.FC = () => {
         </div>
 
         {/* Controls */}
-        <div className="mt-6 flex items-center">
+        <div className="mt-6 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
           <button
             onClick={dealCards}
             disabled={isDealing}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded mr-4"
+            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm md:text-base"
           >
             Deal Cards
           </button>
@@ -156,26 +156,24 @@ const Level2Trainer: React.FC = () => {
             value={guessedCount}
             onChange={(e) => setGuessedCount(e.target.value)}
             placeholder="Your count guess"
-            className="text-black px-4 py-2 rounded"
+            className="text-black px-2 py-1 rounded text-sm md:text-base"
           />
           <button
             onClick={validateGuess}
-            className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded ml-4"
+            className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm md:text-base"
           >
             Submit Guess
           </button>
         </div>
 
         {/* Feedback */}
-        {feedback && <p className="mt-4 text-lg font-bold">{feedback}</p>}
+        {feedback && <p className="mt-4 text-sm md:text-lg font-bold text-center">{feedback}</p>}
       </div>
 
       {/* Explanation to the side */}
-      {explanation && (
-        <pre className="w-1/4 bg-gray-700 text-white p-4 overflow-auto whitespace-pre-line">
-          {explanation}
-        </pre>
-      )}
+      <pre className="w-full md:w-1/4 bg-gray-700 text-white p-4 overflow-auto whitespace-pre-line">
+        {explanation}
+      </pre>
     </div>
   );
 };

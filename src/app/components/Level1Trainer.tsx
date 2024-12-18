@@ -63,9 +63,9 @@ const Level1Trainer: React.FC = () => {
   };
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
       {/* Sidebar - Deck Status */}
-      <div className="w-1/6 p-2 overflow-hidden border-r border-gray-300">
+      <div className="w-full md:w-1/6 p-2 overflow-hidden border-b md:border-b-0 md:border-r border-gray-300">
         <h2 className="text-sm font-bold mb-2 text-gray-700">Deck Status</h2>
         <div className="grid grid-cols-5 gap-1 mb-4">
           {cards.map((card) => (
@@ -91,18 +91,18 @@ const Level1Trainer: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">
+      <div className="flex-1 flex flex-col items-center justify-center p-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">
           Level 1 - Card Counting Trainer
         </h1>
 
         {/* Centered Card */}
-        <div className="flex items-center justify-center h-64 mb-6">
+        <div className="flex items-center justify-center h-48 md:h-64 mb-6">
           {currentCard && (
             <img
               src={`/cards/${currentCard}.png`}
               alt="card"
-              className="w-40 h-auto rounded-lg shadow-2xl"
+              className="w-28 md:w-40 h-auto rounded-lg shadow-2xl"
             />
           )}
         </div>
@@ -111,19 +111,19 @@ const Level1Trainer: React.FC = () => {
         <div className="flex space-x-4">
           <button
             onClick={() => handleSelection(-1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
+            className="bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-md flex items-center justify-center text-lg md:text-2xl"
           >
             -1
           </button>
           <button
             onClick={() => handleSelection(0)}
-            className="bg-gray-500 hover:bg-gray-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
+            className="bg-gray-500 hover:bg-gray-600 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-md flex items-center justify-center text-lg md:text-2xl"
           >
             0
           </button>
           <button
             onClick={() => handleSelection(1)}
-            className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full shadow-md flex items-center justify-center text-2xl"
+            className="bg-green-500 hover:bg-green-600 text-white w-12 h-12 md:w-16 md:h-16 rounded-full shadow-md flex items-center justify-center text-lg md:text-2xl"
           >
             +1
           </button>
@@ -131,7 +131,7 @@ const Level1Trainer: React.FC = () => {
 
         {/* Feedback */}
         <p
-          className={`mt-6 text-lg font-medium ${
+          className={`mt-6 text-sm md:text-lg font-medium text-center ${
             feedback.includes('Correct') ? 'text-green-600' : 'text-red-600'
           }`}
         >
@@ -139,49 +139,49 @@ const Level1Trainer: React.FC = () => {
         </p>
       </div>
 
-{/* Card Counting Guide with Images */}
-<div className="w-1/4 bg-gray-800 p-4 border-l border-gray-300 text-white">
+      {/* Card Counting Guide with Images */}
+      <div className="w-full md:w-1/4 bg-gray-800 p-4 border-t md:border-t-0 md:border-l border-gray-300 text-white">
         <h2 className="text-lg font-bold mb-4">Card Counting Guide</h2>
         <div className="mb-4">
           <p className="font-semibold mb-2">High Cards (-1):</p>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap justify-center space-x-2">
             {['10_of_hearts', 'jack_of_clubs', 'queen_of_diamonds', 'king_of_spades', 'ace_of_hearts'].map((card) => (
               <img
                 key={card}
                 src={`/cards/${card}.png`}
                 alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white"
+                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
               />
             ))}
           </div>
         </div>
         <div className="mb-4">
           <p className="font-semibold mb-2">Low Cards (+1):</p>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap justify-center space-x-2">
             {['2_of_clubs', '3_of_hearts', '4_of_spades', '5_of_diamonds', '6_of_clubs'].map((card) => (
               <img
                 key={card}
                 src={`/cards/${card}.png`}
                 alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white"
+                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
               />
             ))}
           </div>
         </div>
         <div>
           <p className="font-semibold mb-2">Neutral Cards (0):</p>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap justify-center space-x-2">
             {['7_of_clubs', '8_of_diamonds', '9_of_hearts'].map((card) => (
               <img
                 key={card}
                 src={`/cards/${card}.png`}
                 alt={card}
-                className="w-10 h-auto rounded shadow-lg bg-white"
+                className="w-10 h-auto rounded shadow-lg bg-white mb-2"
               />
             ))}
           </div>
         </div>
-        <p className="mt-4 text-sm">
+        <p className="mt-4 text-xs md:text-sm">
           Keep a running count as cards are dealt. High cards decrease the count,
           and low cards increase it. This simple counting system helps you track
           the advantage in the deck!
