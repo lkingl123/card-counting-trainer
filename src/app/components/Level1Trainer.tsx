@@ -33,7 +33,7 @@ const Level1Trainer: React.FC = () => {
   const [currentCard, setCurrentCard] = useState<string | null>(null);
   const [runningCount, setRunningCount] = useState<number>(0);
   const [feedback, setFeedback] = useState<string>("Deck has been reset!");
-  const [isCountVisible, setIsCountVisible] = useState<boolean>(false); // Toggle visibility of running count
+  const [isCountVisible, setIsCountVisible] = useState<boolean>(false);
 
   useEffect(() => {
     handleReset();
@@ -51,7 +51,6 @@ const Level1Trainer: React.FC = () => {
       availableCards[Math.floor(Math.random() * availableCards.length)];
     setCurrentCard(randomCard);
     setUsedCards((prev) => [...prev, randomCard]);
-    setRunningCount((prev) => prev + getCardValue(randomCard));
     setFeedback("");
   };
 
@@ -59,7 +58,15 @@ const Level1Trainer: React.FC = () => {
     if (!currentCard) return;
 
     const correct = selectedValue === getCardValue(currentCard);
-    setFeedback(correct ? `✅ Correct!` : `❌ Incorrect.`);
+    const cardValue = getCardValue(currentCard);
+    
+    if (correct) {
+      setRunningCount((prev) => prev + cardValue);
+      setFeedback(`✅ Correct!`);
+    } else {
+      setFeedback(`❌ Incorrect.`);
+    }
+
     setTimeout(() => drawCard(), 1000);
   };
 
